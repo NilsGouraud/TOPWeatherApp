@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" name="searchBar" id="searchBar" value="london">
+    <button id="button">search</button>
+    
+    <div id="town">
+        retrieving data
+    </div>
+    <div id="country">
+        retrieving data
+    </div>
+    <div id="temperature">
+        retrieving data
+    </div>
+</body>
+<script>
+    helloWorld=document.createElement("div");
+    helloWorld.textContent="hello there";
+    document.body.append(helloWorld)
+    console.log("hello there");
+
+    const searchBar=document.getElementById("searchBar");
+    const button=document.getElementById("button");
+    let searchValue=searchBar.value.replace(/\s/g, "_");
+
+
+    const town=document.getElementById("town");
+    const country=document.getElementById("country");
+    const temperature=document.getElementById("temperature");
+
+    const baseUrl="http://api.weatherapi.com/v1"
+    const weatherAPIKey="e1819c640df04c5b95f131642232011";
+    const keyParameter="?key="+weatherAPIKey;
+    let place=searchValue;
+
+
+
+
+    async function getCurrentWeather(location){
+        try {
+            
+            let request=await fetch(baseUrl+"/current.json"+keyParameter+"&q="+location,{mode:"cors"});
+            
+            let response=await request.json();
+            const {array}=response;
+            town.textContent=response.location.name;
+            country.textContent=response.location.country;
+            temperature.textContent=response.current.temp_c;
+            return response;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+    button.onclick=()=>{
+        let searchValue=searchBar.value.replace(/\s/g, "_");
+        getCurrentWeather(searchValue);
+        console.log(searchValue);
+        console.log(getCurrentWeather(searchValue));
+    }
+
+    searchBar.addEventListener("keyup", event => {
+    if(event.key !== "Enter") return;
+    button.click();
+    event.preventDefault();
+});
+
+
+    
+    
+        console.log(getCurrentWeather(searchValue));
+    localStorage.setItem("weatherAPITest", getCurrentWeather(searchValue));
+</script>
+</html>
