@@ -1,6 +1,6 @@
 /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
+v2.0 | 20110126
+License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe,
@@ -16,35 +16,35 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+    display: block;
 }
 body {
-	line-height: 1;
+    line-height: 1;
 }
 ol, ul {
-	list-style: none;
+    list-style: none;
 }
 blockquote, q {
-	quotes: none;
+    quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+    content: '';
+    content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 /*end of css reset*/
@@ -65,31 +65,46 @@ body{
     height: 100%;
     width: 100%;
     color: white;
-
-    background-image: url("./resources/tom-caillarec-asnFVZlgn_E-unsplash\ \(2\).jpg");
+    
+    background-image: url("./resources/tom-caillarec-asnFVZlgn_E-unsplash\ \(3\).jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0% 40%;
 }
 .bgImg{
-        
-
-        background-color: rgba(0, 0, 0, 0.1);
-
-
+    
+    
+    background-color: rgba(0, 0, 0, 0.151);
+    
+    
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: -1;
+    
+    animation: fadeIn 2s;
+    
+}
 
+@keyframes fadeIn{
+    from  {
+        background-color: rgb(0, 0, 0);
+    }
+    50%{
+        background-color: rgb(0, 0, 0);
+    }
+    to{
+        background-color: rgba(0, 0, 0, 0.151);
+    }
+    
 }
 main{
     display: grid;
     grid-template-columns: 1fr 1fr 0.5fr;
     grid-template-rows: 1fr;
-
+    
 }
 .dataCurrent{
     display: flex;
@@ -100,10 +115,10 @@ main{
     padding: 0.5rem;
     background-color: rgba(0, 0, 0, 0.3);
     margin: 2rem;
-
+    
     box-shadow: 0 0 10rem black;
     max-width: 20rem;
-
+    
 }
 .dataCurrent>div{
     padding:10px;
@@ -113,7 +128,7 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    
     margin-right: auto;
     border-radius: 50%;
     padding-top: -5px;
@@ -166,9 +181,9 @@ button:hover{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
+    
     white-space: pre;
-
+    
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     box-shadow: 0 0 10rem black;
@@ -203,23 +218,23 @@ button:hover{
     padding:10px;
     background-color: rgba(0, 0, 0, 0.3);
     margin: 2rem;
-
+    
     box-shadow: 0 0 10rem black;
 }
 
 .forecast{
-
+    
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-
+    
     padding: 10px;
-
+    
     border-radius: 50%;
     padding:10px;
     background-color: rgba(0, 0, 0, 0.5);
-
+    
     height: 200px;
     width: 200px;
 }
@@ -236,7 +251,7 @@ button:hover{
     50%{
         filter: blur(2px);
     }
-
+    
     to{
         opacity:1
     }
