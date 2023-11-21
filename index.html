@@ -4,80 +4,273 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <input type="text" name="searchBar" id="searchBar" value="london">
-    <button id="button">search</button>
+    <div class="bgImg"></div>
     
-    <div id="town">
-        retrieving data
+    <main>
+        <div class="dataCurrent loading loadable">
+            <div id="time">
+                retrieving data
+            </div>
+            <div class="location">
+                Current weather in <span id="town">retrieving data
+                </span>, <span id="country">retrieving data</span>:
+            </div>
+            
+            <div class="mainInfo">
+                <div>
+                    <img id="imgCondition" src="">
+                </div>
+                <div id="condition">
+                    retrieving data
+                </div>
+                <div id="temperature">
+                    retrieving data
+                </div>
+            </div>
+            <div>
+                <input type="text" name="searchBar" id="searchBar" value="" placeholder="enter your location">
+                <button id="button">search</button>
+            </div>
+            
+        </div>
+        
+        
+        <div class="spacer"></div>
+        
+        
+        <div class="details loading loadable">          
+            <div>  
+                <img src="./resources/feeling.png" alt="">
+                <div><div>feeling:</div>
+                    <div class="detailFigure" id="feeling">retrieving data</div>
+                </div>
+            </div>
+            <div>
+                <img src="./resources/humidity.png" alt="">
+                <div><div>humidity:</div>
+                    <div class="detailFigure" id="humidity">retrieving data</div>
+                </div>
+            </div>
+            <div>
+                <img src="./resources/chanceOfRain.png" alt="">
+                <div><div>chance of rain:</div>
+                    <div class="detailFigure" id="chanceOfRain">retrieving data</div>
+                </div>
+            </div>
+            <div>
+                <img src="./resources/wind.png" alt="">
+                <div><div>wind speed:</div>
+                    <div class="detailFigure" id="windSpeed">retrieving data</div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </main>
+    
+    <div class="dataForecast loadable">
+        <div id="forecastOne" class="forecast">
+            <div id="forecastOneDayName">
+                retrieving data 
+            </div>
+            <img class="icon" id="iconOne" src="">
+            <div class="condition" id="conditionOne"></div>
+            <div class="temperature" id="tempOne"></div>
+        </div>
+        <div id="forecastTwo" class="forecast">
+            <div id="forecastTwoDayName">
+                retrieving data 
+            </div>
+            <img class="icon" id="iconTwo" src="">
+            <div class="condition" id="conditionTwo"></div>
+            <div class="temperature" id="tempTwo"></div>
+        </div>
+        <div id="forecastThree" class="forecast">
+            <div id="forecastThreeDayName">
+                retrieving data 
+            </div>
+            <img class="icon" id="iconThree" src="">
+            <div class="condition" id="conditionThree"></div>
+            <div class="temperature" id="tempThree"></div>
+        </div>
     </div>
-    <div id="country">
-        retrieving data
-    </div>
-    <div id="temperature">
-        retrieving data
-    </div>
+    
+    <div id="overlay"></div>
 </body>
 <script>
-    helloWorld=document.createElement("div");
-    helloWorld.textContent="hello there";
-    document.body.append(helloWorld)
     console.log("hello there");
-
+    
     const searchBar=document.getElementById("searchBar");
     const button=document.getElementById("button");
     let searchValue=searchBar.value.replace(/\s/g, "_");
+    
 
+    const loadableComponents=document.querySelectorAll(".loadable");
 
+    /*current weather main elements*/
     const town=document.getElementById("town");
     const country=document.getElementById("country");
+    const time=document.getElementById("time")
     const temperature=document.getElementById("temperature");
-
+    const condition=document.getElementById("condition");
+    const imgCondition=document.getElementById("imgCondition");
+    
+    /*current weather details*/
+    const feeling=document.getElementById("feeling")
+    const humidity=document.getElementById("humidity")
+    const chanceOfRain=document.getElementById("chanceOfRain")
+    const windSpeed=document.getElementById("windSpeed")
+    
+    
+    
+    /*forecast weather*/
+    const forecastOneDayName=document.getElementById("forecastOneDayName");
+    const forecastTwoDayName=document.getElementById("forecastTwoDayName");
+    const forecastThreeDayName=document.getElementById("forecastThreeDayName");
+    
+    const tempOne=document.getElementById("tempOne");
+    const tempTwo=document.getElementById("tempTwo");
+    const tempThree=document.getElementById("tempThree");
+    
+    
+    const conditionOne=document.getElementById("conditionOne")
+    const conditionTwo=document.getElementById("conditionTwo")
+    const conditionThree=document.getElementById("conditionThree")
+    
+    const iconOne=document.getElementById("iconOne");
+    const iconTwo=document.getElementById("iconTwo");
+    const iconThree=document.getElementById("iconThree");
+    
     const baseUrl="http://api.weatherapi.com/v1"
     const weatherAPIKey="e1819c640df04c5b95f131642232011";
     const keyParameter="?key="+weatherAPIKey;
     let place=searchValue;
-
-
-
-
+    
+    const dayName=["Sunday","Monsday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    const dayNameFR=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"]
+    
+    const monthName=["January","February","March","April","May","June","July","August","September","October","November","December"]
+    
     async function getCurrentWeather(location){
         try {
-            
-            let request=await fetch(baseUrl+"/current.json"+keyParameter+"&q="+location,{mode:"cors"});
+            loadableComponents.forEach(component=>component.classList.add("loading"));
+
+            let request=await fetch(baseUrl+"/forecast.json"+keyParameter+"&days=4"+"&q="+location,{mode:"cors"});
             
             let response=await request.json();
-            const {array}=response;
+            
+            let localtime=response.location.localtime;
+            let date=new Date(localtime);
+            
+            let stringTime=localtime.split("-");
+            let stringDayAndHour=stringTime[2].split(" ");
+            let year=stringTime[0];
+            let month=stringTime[1];
+            let day=stringDayAndHour[0];
+            let hour=stringDayAndHour[1];
+            
+            console.log(stringDayAndHour)
+            
             town.textContent=response.location.name;
             country.textContent=response.location.country;
-            temperature.textContent=response.current.temp_c;
+            time.textContent=dayName[date.getDay()]+" "+day+" "+monthName[date.getMonth()]+" " +year+",\n"+hour;
+            temperature.textContent=response.current.temp_c+"°C";
+            condition.textContent=response.current.condition.text;
+            imgCondition.src=response.current.condition.icon.replace("//","https://");
+            
+            feeling.textContent=response.current.feelslike_c+"°C";
+            humidity.textContent=response.current.humidity+"%";
+            chanceOfRain.textContent=response.forecast.forecastday[0].day.daily_chance_of_rain+"%"
+            windSpeed.textContent=response.current.wind_kph+"km/h";
+            /*
+            const feeling=document.getElementById("feeling")
+            const humidity=document.getElementById("humidity")
+            const chanceOfRain=document.getElementById("chanceOfRain")
+            const windSpeed=document.getElementById("windSpeed")*/
+            
+            loadableComponents.forEach(element=> element.classList.remove("loading"));
             return response;
         } catch (error) {
             console.log(error)
         }
     }
+    async function getForecast(location){
+        try {
+            
+            
 
+            let request=await fetch(baseUrl+"/forecast.json"+keyParameter+"&days=4"+"&q="+location,{mode:"cors"});
+            
+            let response=await request.json();
+            
+            let dayOne=new Date(response.forecast.forecastday[1].date);
+            let dayTwo=new Date(response.forecast.forecastday[2].date);
+            let dayThree=new Date(response.forecast.forecastday[3].date);
+            
+            tempOne.textContent=response.forecast.forecastday[1].day.avgtemp_c+"°C";
+            tempTwo.textContent=response.forecast.forecastday[2].day.avgtemp_c+"°C";
+            tempThree.textContent=response.forecast.forecastday[3].day.avgtemp_c+"°C";
+            
+            forecastOneDayName.textContent=dayName[dayOne.getDay()];
+            forecastTwoDayName.textContent=dayName[dayTwo.getDay()];
+            forecastThreeDayName.textContent=dayName[dayThree.getDay()];
+            
+            conditionOne.textContent=response.forecast.forecastday[1].day.condition.text;
+            conditionTwo.textContent=response.forecast.forecastday[2].day.condition.text;
+            conditionThree.textContent=response.forecast.forecastday[3].day.condition.text;
+            
+            iconOne.src=response.forecast.forecastday[1].day.condition.icon.replace("//","https://");
+            iconTwo.src=response.forecast.forecastday[2].day.condition.icon.replace("//","https://");
+            iconThree.src=response.forecast.forecastday[3].day.condition.icon.replace("//","https://");
+            
 
-
+            return response;
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+    
+    
+    
     button.onclick=()=>{
         let searchValue=searchBar.value.replace(/\s/g, "_");
         getCurrentWeather(searchValue);
         console.log(searchValue);
         console.log(getCurrentWeather(searchValue));
     }
-
+    
     searchBar.addEventListener("keyup", event => {
-    if(event.key !== "Enter") return;
-    button.click();
-    event.preventDefault();
-});
-
-
+        if(event.key !== "Enter") return;
+        button.click();
+        event.preventDefault();
+    });
     
     
-        console.log(getCurrentWeather(searchValue));
-    localStorage.setItem("weatherAPITest", getCurrentWeather(searchValue));
+    
+    
+    console.log(getCurrentWeather("Cholet"));
+    console.log(getForecast("Cholet"));
 </script>
 </html>
+
+<!--
+    
+    Write the functions that hit the API. You’re going to want functions that can take a location and return the weather data for that location. For now, just console.log() the information.
+    
+    
+    Write the functions that process the JSON data you’re getting from the API and return an object with only the data you require for your app.
+    
+    Set up a simple form that will let users input their location and will fetch the weather info (still just console.log() it).
+    
+    Display the information on your webpage!
+    
+    Add any styling you like!
+    
+    Optional: add a ‘loading’ component that displays from the time the form is submitted until the information comes back from the API. Use DevTools to test for low-end devices.
+    Push that baby to github and share your solution below!
+    
+-->
