@@ -70,6 +70,22 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0% 40%;
+    animation: krebs 5s 6s forwards;
+}
+@keyframes krebs{
+    from{
+    }
+    30%{
+        filter: blur(10px);
+        background-image: url("./resources/tom-caillarec-asnFVZlgn_E-unsplash\ \(3\).jpg");
+        background-position: 0% 0%;
+
+    }
+    to{
+        background-image: url("./resources/krebs.png");
+        filter: none;
+        background-position: 0% 0%;
+    }
 }
 .bgImg{
     
