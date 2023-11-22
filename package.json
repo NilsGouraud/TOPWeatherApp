@@ -1,0 +1,23 @@
+{
+  "name": "topweatherapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NilsGouraud/TOPWeatherApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NilsGouraud/TOPWeatherApp/issues"
+  },
+  "homepage": "https://github.com/NilsGouraud/TOPWeatherApp#readme",
+  "devDependencies": {
+    "eslint": "^8.54.0"
+  }
+}
