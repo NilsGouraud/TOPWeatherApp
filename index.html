@@ -131,10 +131,12 @@
     const forecastTwoDayName=document.getElementById("forecastTwoDayName");
     const forecastThreeDayName=document.getElementById("forecastThreeDayName");
     
+    
     const tempOne=document.getElementById("tempOne");
     const tempTwo=document.getElementById("tempTwo");
     const tempThree=document.getElementById("tempThree");
     
+
     
     const conditionOne=document.getElementById("conditionOne")
     const conditionTwo=document.getElementById("conditionTwo")
@@ -191,21 +193,7 @@
             const chanceOfRain=document.getElementById("chanceOfRain")
             const windSpeed=document.getElementById("windSpeed")*/
             
-            loadableComponents.forEach(element=> element.classList.remove("loading"));
-            return response;
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    async function getForecast(location){
-        try {
-            
-            
-
-            let request=await fetch(baseUrl+"/forecast.json"+keyParameter+"&days=4"+"&q="+location,{mode:"cors"});
-            
-            let response=await request.json();
-            
+            /*forecast*/
             let dayOne=new Date(response.forecast.forecastday[1].date);
             let dayTwo=new Date(response.forecast.forecastday[2].date);
             let dayThree=new Date(response.forecast.forecastday[3].date);
@@ -225,13 +213,14 @@
             iconOne.src=response.forecast.forecastday[1].day.condition.icon.replace("//","https://");
             iconTwo.src=response.forecast.forecastday[2].day.condition.icon.replace("//","https://");
             iconThree.src=response.forecast.forecastday[3].day.condition.icon.replace("//","https://");
-            
+            /*end of forecast*/
 
+
+            loadableComponents.forEach(element=> element.classList.remove("loading"));
             return response;
         } catch (error) {
             console.log(error)
         }
-        
     }
     
     
