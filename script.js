@@ -2,7 +2,7 @@ console.log("hello there");
     
     const searchBar=document.getElementById("searchBar");
     const button=document.getElementById("button");
-    const searchValue=searchBar.value.replace(/\s/g, "_");
+    //let searchValue=searchBar.value.replace(/\s/g, "_");
     
     const loadableComponents=document.querySelectorAll(".loadable");
     
@@ -106,7 +106,8 @@ console.log("hello there");
         }
     }
     button.onclick=()=>{
-        console.log(getCurrentWeather(searchValue));
+        console.log(searchBar.value.replace(/\s/g, "_"));
+        console.log(getCurrentWeather(searchBar.value.replace(/\s/g, "_")));
     }
     searchBar.addEventListener("keyup", event => {
         if(event.key !== "Enter") return;
