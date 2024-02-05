@@ -59,7 +59,7 @@ console.log("hello there");
         try {
             loadableComponents.forEach(component=>component.classList.add("loading"));
             
-            let request=await fetch(baseUrl+"/forecast.json"+keyParameter+"&days=4"+"&q="+location,{mode:"cors"});
+            let request=await fetch(baseUrl+"/forecast.json"+keyParameter+"&days=3"+"&q="+location,{mode:"cors"});
             
             let response=await request.json();
             
@@ -88,9 +88,8 @@ console.log("hello there");
             const allDays=[
             new Date(response.forecast.forecastday[1].date),
             new Date(response.forecast.forecastday[2].date),
-            new Date(response.forecast.forecastday[3].date)
             ]
-            for(let i=1;i<4;i++){
+            for(let i=1;i<3;i++){
                 tempForecast[i-1].textContent=response.forecast.forecastday[i].day.avgtemp_c+"°C";
                 forecastDayName[i-1].textContent=dayName[allDays[i-1].getDay()];
                 conditionForecast[i-1].textContent=response.forecast.forecastday[i].day.condition.text;
