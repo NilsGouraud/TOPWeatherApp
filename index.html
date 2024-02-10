@@ -44,67 +44,67 @@
         <div class="details loading loadable">          
             <div>  
                 <img src="./resources/feeling.png" alt="">
-                <div><div>feeling:</div>
-                <div class="detailFigure" id="feeling">retrieving data</div>
+                <div>
+                    <div>feeling:</div>
+                    <div class="detailFigure" id="feeling">retrieving data</div>
+                </div>
             </div>
+            <div>
+                <img src="./resources/humidity.png" alt="">
+                <div>
+                    <div>humidity:</div>
+                    <div class="detailFigure" id="humidity">retrieving data</div>
+                </div>
+            </div>
+            <div>
+                <img src="./resources/chanceOfRain.png" alt="">
+                <div>
+                    <div>chance of rain:</div>
+                    <div class="detailFigure" id="chanceOfRain">retrieving data</div>
+                </div>
+            </div>
+            <div>
+                <img src="./resources/wind.png" alt="">
+                <div>
+                    <div>wind speed:</div>
+                    <div class="detailFigure" id="windSpeed">retrieving data</div>
+                </div>
+            </div>
+            <canvas id="earth"></canvas>
         </div>
-        <div>
-            <img src="./resources/humidity.png" alt="">
-            <div><div>humidity:</div>
-            <div class="detailFigure" id="humidity">retrieving data</div>
+        
+        
+    </main>
+    
+    <div class="dataForecast loadable">
+        <div id="forecastOne" class="forecast">
+            <div id="forecastOneDayName">
+                retrieving data 
+            </div>
+            <img class="icon" id="iconOne" src="">
+            <div class="condition" id="conditionOne"></div>
+            <div class="temperature" id="tempOne"></div>
+        </div>
+        <div id="forecastTwo" class="forecast">
+            <div id="forecastTwoDayName">
+                retrieving data 
+            </div>
+            <img class="icon" id="iconTwo" src="">
+            <div class="condition" id="conditionTwo"></div>
+            <div class="temperature" id="tempTwo"></div>
+        </div>
+        <div id="forecastThree" class="forecast">
+            
+            
         </div>
     </div>
-    <div>
-        <img src="./resources/chanceOfRain.png" alt="">
-        <div><div>chance of rain:</div>
-        <div class="detailFigure" id="chanceOfRain">retrieving data</div>
-    </div>
-</div>
-<div>
-    <img src="./resources/wind.png" alt="">
-    <div><div>wind speed:</div>
-    <div class="detailFigure" id="windSpeed">retrieving data</div>
-</div>
-</div>
-</div>
-
-
-</main>
-
-<div class="dataForecast loadable">
-    <div id="forecastOne" class="forecast">
-        <div id="forecastOneDayName">
-            retrieving data 
-        </div>
-        <img class="icon" id="iconOne" src="">
-        <div class="condition" id="conditionOne"></div>
-        <div class="temperature" id="tempOne"></div>
-    </div>
-    <div id="forecastTwo" class="forecast">
-        <div id="forecastTwoDayName">
-            retrieving data 
-        </div>
-        <img class="icon" id="iconTwo" src="">
-        <div class="condition" id="conditionTwo"></div>
-        <div class="temperature" id="tempTwo"></div>
-    </div>
-    <div id="forecastThree" class="forecast">
-        <div id="forecastThreeDayName">
-            unavailable 
-        </div>
-        <img class="icon" id="iconThree" src="">
-        <div class="condition" id="conditionThree"></div>
-        <div class="temperature" id="tempThree"></div>
-    </div>
-</div>
-
-<div id="overlay"></div>
+    
+    <div id="overlay"></div>
 </body>
-<script src="./script.js"></script>
+<script type="module" src="./script.js"></script>
 </html>
 
-<!--
-    
+<!--    
     Write the functions that hit the API. You’re going to want functions that can take a location and return the weather data for that location. For now, just console.log() the information.
     
     
@@ -117,6 +117,5 @@
     Add any styling you like!
     
     Optional: add a ‘loading’ component that displays from the time the form is submitted until the information comes back from the API. Use DevTools to test for low-end devices.
-    Push that baby to github and share your solution below!
-    
+    Push that baby to github and share your solution below!    
 -->
