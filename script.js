@@ -100,8 +100,8 @@ basicSphere.scale.setScalar(0.004)
         obj.rotateOnAxis(axis, theta); // rotate the OBJECT
     }
     
-    //tweaking position
-    earthGroup.rotation.y=3,14159; 
+ 
+     
     
     
     const basicSphereLight=new THREE.PointLight( "cyan",1,0,0);
@@ -109,9 +109,15 @@ basicSphere.scale.setScalar(0.004)
     basicSphereLight.intensity=0.7;
     basicSphere.add(basicSphereLight);
     
+
     const setCoordinates=(latitude, longitude)=>{
         basicSphere.position.set(0,earthSize*1.03,0);
         earthGroup.position.set(0,0,0);
+        earthGroup.rotation.set(0,0,0);
+        earthGroup.rotateOnAxis(new THREE.Vector3(0,0,1),0.8);
+        earthGroup.rotateOnAxis(new THREE.Vector3(0,1,0),2.9);
+        //earthGroup.rotation.y=(-201.72*Math.PI/180);
+        //earthGroup.rotation.z=-43.1*(Math.PI/180);
         let radLat=(-latitude+90)*Math.PI/180;
         let radLong=(longitude)*Math.PI/180;
         rotateAboutPoint(basicSphere, new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,1), radLat, false);
@@ -119,9 +125,21 @@ basicSphere.scale.setScalar(0.004)
         rotateAboutPoint(basicSphereLight, new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,1), radLat, false);
         rotateAboutPoint(basicSphereLight, new THREE.Vector3(0,0,0),new THREE.Vector3(0,1,0), radLong, false);
         
-        earthGroup.rotation.z=-radLat/4+0.25; 
-        //earthGroup.rotation.x=radLat;
-        earthGroup.rotation.y=(Math.PI-radLong)-0.2;
+
+
+
+        let actualRadLat=(latitude*Math.PI/180)
+        // earthGroup.rotation.y+=-radLong;
+        //earthGroup.rotation.z+=(latitude*Math.PI/180)
+
+        //earthGroup.rotation.setFromVector3(new THREE.Vector3(0,Math.PI-radLong, (latitude*Math.PI/180)));
+        //earthGroup.rotation.setFromVector3(new THREE.Vector3(0,(-201.72*Math.PI/180)-radLong,-43.1*(Math.PI/180)+actualRadLat));
+        earthGroup.rotateOnAxis(new THREE.Vector3(0,0,1),(latitude*Math.PI/180));
+        earthGroup.rotateOnAxis(new THREE.Vector3(0,1,0),(-radLong));
+
+        
+
+
     }
     setCoordinates(40,-73);
     setCoordinates(48.4,-4.48);
@@ -145,6 +163,7 @@ basicSphere.scale.setScalar(0.004)
         clouds.rotation.y+=0.0005
         window.requestAnimationFrame(loop);
         basicSphere.rotation.z+=0.05
+        basicSphere.rotation.y+=0.05
     }
     loop();
 
@@ -244,6 +263,8 @@ async function getCurrentWeather(location){
 
         console.log(response);
         setCoordinates(response.location.lat,response.location.lon);
+        
+
         /*forecast*/
         const allDays=[
             new Date(response.forecast.forecastday[1].date),
@@ -274,7 +295,9 @@ searchBar.addEventListener("keyup", event => {
     
     event.preventDefault();
 });
-console.log(getCurrentWeather("Cholet"));
+console.log(getCurrentWeather("Tel-Aviv"));
+
+
 
     
 
