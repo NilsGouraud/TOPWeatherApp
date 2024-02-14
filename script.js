@@ -295,7 +295,7 @@ searchBar.addEventListener("keyup", event => {
     
     event.preventDefault();
 });
-console.log(getCurrentWeather("Tel-Aviv"));
+console.log(getCurrentWeather("Vesoul"));
 
 
 
