@@ -226,7 +226,7 @@ const baseUrl="https://api.weatherapi.com/v1"
 const weatherAPIKey="e1819c640df04c5b95f131642232011";
 const keyParameter="?key="+weatherAPIKey;
 
-const dayName=["Sunday","Monsday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+const dayName=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 //TODO add a french translation     const dayNameFR=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"]
 
 const monthName=["January","February","March","April","May","June","July","August","September","October","November","December"]
