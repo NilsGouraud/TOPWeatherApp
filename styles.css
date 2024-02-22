@@ -292,6 +292,10 @@ canvas{
 }
 
 @media all and(min-width:1101px){
+body{
+        overflow: scroll;
+                height: 100%;
+}
     .forecast:hover{
         scale: 1.5;
         cursor: pointer;
@@ -302,6 +306,7 @@ canvas{
 
 @media all and (max-width:1100px){
     body{
+        overflow: scroll;
 
         margin: 0;
         display: flex;
