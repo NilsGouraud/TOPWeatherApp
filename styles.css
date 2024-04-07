@@ -56,11 +56,9 @@ html{
 }
 
 body{
-    z-index: -1;
     margin: 0;
-    display: flex;
+    display: block;
     flex-direction: column;
-    justify-content: space-between;
     
     /* filter: blur(0.5px); */
     height: 100%;
@@ -74,13 +72,12 @@ body{
 }
 .bgImg{  
     background-color: rgba(0, 0, 0, 0.151);
-   
+    z-index: -1;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 0;
     
     animation: fadeIn 2s;
 }
@@ -111,7 +108,7 @@ main{
     border-radius: 10px;
     padding: 0.5rem;
     background-color: rgba(0, 0, 0, 0.3);
-    margin: 2rem;
+    margin: 0rem;
     
     box-shadow: 0 0 10rem black;
     max-width: 20rem;
@@ -198,7 +195,7 @@ button:hover{
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     box-shadow: 0 0 10rem black;
-    margin: 2rem;
+    margin: 0rem;
 }
 .details img{
     filter: invert();
@@ -216,6 +213,7 @@ button:hover{
     font-weight: 800;
 }
 
+
 .condition{
     font-size: 0.5rem;
 }
@@ -226,11 +224,11 @@ button:hover{
     justify-content: space-around;
     align-items: center;
     border-radius: 10px;
-    padding:10px;
+    padding:0;
     background-color: rgba(0, 0, 0, 0.3);
-    margin: 2rem;
-    
+    margin: 0;
     box-shadow: 0 0 10rem black;
+    overflow: hidden;
 }
 
 .forecast{
@@ -243,7 +241,6 @@ button:hover{
     padding: 10px;
     
     border-radius: 50%;
-    padding:10px;
     background-color: rgba(0, 0, 0, 0.5);
     
     height: 200px;
@@ -290,16 +287,50 @@ canvas{
     display: none;
 }
 
-@media all and(min-width:1101px){
 
-    .forecast:hover{
-        scale: 1.5;
+.forecast:hover{
+        scale: 1.3;
         cursor: pointer;
         background-color: rgba(0, 0, 0, 0.6);
         box-shadow: 0 0 10rem rgba(99, 99, 99, 0.24);
     }
+
+    /*full hd version*/
+@media all and (min-width: 1500px){
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        font-size: 1.25rem;
+    }
+    .forecast{
+        height: 300px;
+        width: 300px;
+    }
+
+    #town{
+        font-size: 1.6rem;
+        font-weight: 800;
+    }
+    #country{
+        font-size: 1.6rem;
+    }
+    .detailFigure{
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+    #temperature{
+        font-size: 2.5rem;
+    }
+    
+    .condition{
+        font-size: 1rem;
+    }
+    
 }
 
+
+    /*mobile version*/
 @media all and (max-width:1100px){
     body{
         margin: 0;
@@ -321,15 +352,23 @@ canvas{
         display: none;
     }
     main{
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        display: block;
+    }
+    canvas{
+        scale: 0.8;
     }
     .dataForecast{
-        margin-right: auto;
         flex-direction: column;
         align-items: left;
         justify-content: left;
+        overflow: visible;
+    }
+    .details{
+        margin: 2rem 0;
+        scale: 0.85;
+        }
+    .dataCurrent{
+        margin: 10px;
     }
     .forecast{
         background: linear-gradient(90deg,rgba(124, 124, 124, 0.507),rgba(0, 0, 0, 0.541));
