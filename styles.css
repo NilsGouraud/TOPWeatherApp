@@ -255,6 +255,7 @@ button:hover{
     width: 200px;
 }
 canvas{
+    z-index: -1;
     margin-top: 5rem;
     grid-row-start: 1;
     grid-row-end: 4;
